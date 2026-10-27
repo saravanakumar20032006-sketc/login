@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div
+        class="max-w-[100%] bg-[url(https://img.magnific.com/free-vector/geometric-gradient-futuristic-background_23-2149116406.jpg?semt=ais_hybrid&w=740&q=80)] h-screen bg-cover">
+        <div class="w-[30%] mx-auto flex flex-col justify-center min-h-screen">
+            <div class="text-white  grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <h1 class="text-[38px] font-bold text-center">Login </h1>
+
+                <form id="form" class="flex flex-col gap-6">
+                    <div class="flex flex-col gap-5">
+                        <label for="email">Email:</label>
+                        <input class="py-2 rounded-lg border outline-none pl-3 text-black" 
+                        type="text" 
+                        name="email"
+                        id="email" 
+                        placeholder="Enter Your Email">
+                        <p id="emailError" class="bg-red-500"></p>
+                    </div>
+
+                    <div class="flex flex-col gap-5 ">
+                        <label for="password">Password:</label>
+                        <input class="py-2 rounded-lg border outline-none pl-3 text-black" 
+                        type="text" 
+                        name="password"
+                        id="password" 
+                        placeholder="Enter Your Password">
+                        <p id="PassError" class="bg-red-500"></p>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="py-2 px-5 rounded-lg bg-green-500">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        var formContainer = document.getElementById('form');
+        var email = document.getElementById('email');
+        var password = document.getElementById('password');
+
+        var emailError = document.getElementById('emailError');
+        var PassError = document.getElementById('PassError');
+
+
+        formContainer.addEventListener("submit", (e) => {
+            e.preventDefault();     // => Stoping rerender 
+            console.dir(email);      // => Browser la Elemantes oda properties ah inspect pannum
+
+            advancedValidation(email.value, password.value);
+            
+        });
+        const advancedValidation = (email , password) => {
+            // console.log("Email is valid");
+            // console.log(email);
+            
+            const emailRegex = /^\S+@\S+\.\S+$/;
+            const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+                         
+            // Email
+           if(email.match(emailRegex)) {
+            console.log("Email Is Valid", email);
+            emailError.textContent = " ";
+        } else {
+            console.log("Email is Invalid", email);
+            emailError.textContent = "Invalid email format";
+            }
+            //Password
+            if(password.match(passwordRegex)) {
+                console.log("Password is Valid", password);
+                PassError.textContent = " ";
+            } else {
+                console.log("Password is Invalid", password);
+                PassError.textContent = "invalid Password format";
+            }
+
+
+        };
+    </script>
+</body>
+
+</html>
